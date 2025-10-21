@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Akcja -->
+    <record id="action_simple_report" model="ir.actions.act_window">
+        <field name="name">Raport magazynowy</field>
+        <field name="res_model">simple.inventory.report</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <!-- Widok formularza -->
+    <record id="view_simple_report_form" model="ir.ui.view">
+        <field name="name">simple.inventory.report.form</field>
+        <field name="model">simple.inventory.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="download_csv_report" type="object" string="Pobierz CSV" class="btn-primary"/>
+                    <button name="download_xlsx_report" type="object" string="Pobierz XLSX" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date"/>
+                        <field name="description"/>
+                        <field name="responsible_person"/>
+                        <field name="product_ids" widget="many2many_tags"/>
+                        <field name="total_quantity" readonly="1"/>
+                        <field name="total_value" readonly="1"/>
+                  
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_inventory" name="Magazyn" sequence="20"/>
+    <menuitem id="menu_report" name="Raport" parent="menu_inventory" action="action_simple_report" sequence="10"/>
+</odoo>
